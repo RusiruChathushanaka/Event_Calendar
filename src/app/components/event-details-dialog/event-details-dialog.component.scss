@@ -1,0 +1,30 @@
+.mat-form-field {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.mat-form-field:last-child {
+  margin-bottom: 0;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-dialog-container {
+  width: 800px;
+}
+
+.mat-dialog-content {
+  height: 30vh;
+}
+
+.mat-form-field-flex {
+  display: flex;
+  align-items: center;
+}
+
+.mat-datepicker-toggle {
+  margin-left: auto;
+}

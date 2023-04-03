@@ -1,0 +1,93 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Event Calendar</span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="form-fields">
+  <form [formGroup]="myForm">
+    <div class="filters">
+      <mat-form-field appearance="fill">
+        <mat-label>Event Type</mat-label>
+        <mat-select
+          formControlName="_eventTypes"
+          (selectionChange)="onSelectionChange()"
+          multiple
+        >
+          <mat-select-trigger>
+            {{eventTypes.value?.[0] || ''}}
+            <span
+              *ngIf="(eventTypes.value?.length || 0) > 1"
+              class="example-additional-selection"
+            >
+              (+{{ (eventTypes.value?.length || 0) - 1 }}
+              {{ eventTypes.value?.length === 2 ? "other" : "others" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let eventType of eventTypeList"
+            [value]="eventType"
+            >{{ eventType }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <p>Selected event types: {{ eventTypes.value }}</p> -->
+    </div>
+
+    <div class="filters">
+      <mat-form-field appearance="fill">
+        <mat-label>Event Status (Completed)</mat-label>
+        <mat-select
+          formControlName="_eventStatus"
+          (selectionChange)="onSelectionChange()"
+          multiple
+        >
+          <mat-select-trigger>
+            {{eventStatus.value?.[0] || ''}}
+            <span
+              *ngIf="(eventStatus.value?.length || 0) > 1"
+              class="example-additional-selection"
+            >
+              (+{{ (eventStatus.value?.length || 0) - 1 }}
+              {{ eventStatus.value?.length === 2 ? "other" : "others" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let eventSt of eventStatusList"
+            [value]="eventSt"
+            >{{ eventSt }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <p>Selected event Status (Completed) : {{ eventStatus.value }}</p> -->
+    </div>
+  </form>
+</div>
+
+<div class="calendar">
+  <full-calendar [options]="calendarOptions" [events]="events$ | async">
+  </full-calendar>
+</div>
+<router-outlet></router-outlet>
